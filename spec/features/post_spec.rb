@@ -8,6 +8,10 @@ describe 'navigate' do
     end
 
     it 'has a title of Posts' do
+      user = User.create(email: 'test@test.com', password: 'foobar',
+                         password_confirmation: 'foobar', first_name: 'Jon',
+                         last_name: 'Snow')
+      login_as(user, scope: :user)
       visit posts_path
       expect(page).to have_content(/Posts/)
     end

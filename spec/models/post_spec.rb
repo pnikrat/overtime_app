@@ -6,8 +6,7 @@ RSpec.describe Post, type: :model do
       @user = User.create(email: 'test@test.com', password: 'foobar',
                           password_confirmation: 'foobar', first_name: 'Jon',
                           last_name: 'Snow')
-      @post = Post.create(date: Date.today, rationale: 'Anything')
-      @post.user_id = @user.id
+      @post = @user.posts.create(date: Date.today, rationale: 'Anything')
     end
 
     it 'can be created' do
