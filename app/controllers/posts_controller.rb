@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :get_post, only: %i[show]
+  before_action :find_post, only: %i[show]
 
   def index; end
 
@@ -20,11 +20,11 @@ class PostsController < ApplicationController
 
   private
 
-    def post_params
-      params.require(:post).permit(:date, :rationale)
-    end
+  def post_params
+    params.require(:post).permit(:date, :rationale)
+  end
 
-    def get_post
-      @post = Post.find(params[:id])
-    end
+  def find_post
+    @post = Post.find(params[:id])
+  end
 end

@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+# rubocop:disable Metrics/BlockLength
 describe 'navigate' do
   describe 'index' do
     it 'can be reached successfully' do
@@ -30,14 +30,14 @@ describe 'navigate' do
     end
 
     it 'can be created from new form page' do
-      fill_in 'post[date]', with: Date.today
+      fill_in 'post[date]', with: Time.zone.today
       fill_in 'post[rationale]', with: 'Some rationale'
       click_on 'Save'
       expect(page).to have_content('Some rationale')
     end
 
     it 'will have a user associated with it' do
-      fill_in 'post[date]', with: Date.today
+      fill_in 'post[date]', with: Time.zone.today
       fill_in 'post[rationale]', with: 'User_Association'
       click_on 'Save'
       expect(User.last.posts.last.rationale).to eq('User_Association')
