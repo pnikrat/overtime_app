@@ -1,9 +1,9 @@
 .logo
   %h1 Time Tracker
 %ul.custom-nav.nav.nav-tabs
-  %li.active
+  %li{class: "#{active?(root_path)}"}
     = link_to 'Home', root_path
-  %li
+  %li{class: "#{active?(posts_path)}"}
     = link_to 'Time entries', posts_path
   %li.dropdown.pull-right
     %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}} Account
