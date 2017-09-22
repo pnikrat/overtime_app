@@ -1,28 +1,35 @@
 require 'rails_helper'
 # rubocop:disable Metrics/BlockLength
 describe 'navigate' do
+  before do
+    user = User.create(email: 'test@test.com', password: 'foobar',
+                       password_confirmation: 'foobar', first_name: 'Jon',
+                       last_name: 'Snow')
+    user.posts.create(date: Time.zone.today, rationale: 'Post1')
+    user.posts.create(date: Time.zone.today, rationale: 'Post2')
+    login_as(user, scope: :user)
+  end
+
   describe 'index' do
-    it 'can be reached successfully' do
+    before do
       visit posts_path
+    end
+
+    it 'can be reached successfully' do
       expect(page.status_code).to eq(200)
     end
 
     it 'has a title of Posts' do
-      user = User.create(email: 'test@test.com', password: 'foobar',
-                         password_confirmation: 'foobar', first_name: 'Jon',
-                         last_name: 'Snow')
-      login_as(user, scope: :user)
-      visit posts_path
       expect(page).to have_content(/Posts/)
+    end
+
+    it 'has a list of posts' do
+      expect(page).to have_content(/Post1|Post2/)
     end
   end
 
   describe 'creation' do
     before do
-      user = User.create(email: 'test@test.com', password: 'foobar',
-                         password_confirmation: 'foobar', first_name: 'Jon',
-                         last_name: 'Snow')
-      login_as(user, scope: :user)
       visit new_post_path
     end
     it 'has a new form that can be reached' do
