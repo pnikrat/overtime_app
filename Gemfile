@@ -16,6 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'factory_girl_rails', '~> 4.8'
   gem 'pry', '~> 0.11.0'
   gem 'rspec-rails', '~> 3.0'
 end
